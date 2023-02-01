@@ -1,0 +1,328 @@
+<input type="checkbox" id="nav-toggle">
+
+<div class="sidebar">
+  <div class="sidebar-brand">
+    <h2>
+      <span class="las la-link"></span>
+      <!-- <span><img src="https://img.icons8.com/ios-filled/35/000000/cloud-sync--v1.png"/></span> -->
+      <span>Insync</span></h2>
+  </div>
+
+  <div class="sidebar-menu">
+    <ul>
+      <li>
+        <a routerLink="/regions" ><span class="las la-igloo"></span>
+          <span>Regions </span></a>
+      </li>
+      <li>
+        <a routerLink="/"><span class="las la-users"></span>
+          <span>Countries</span></a>
+      </li>
+      <li>
+        <a href="" routerLink="/locations" class="active"><span class="las la-clipboard-list"></span>
+          <span>Locations </span></a>
+      </li>
+      <li>
+        <a href="" routerLink="/departments"><span class="las la-shopping-bag"></span>
+          <span>Departments </span></a>
+      </li>
+      <li>
+        <a href="" routerLink="/jobs"><span class="las la-receipt"></span>
+          <span>Jobs </span></a>
+      </li>
+      <li>
+        <a href="" routerLink="/employees"><span class="las la-user-circle"></span>
+          <span>Employees </span></a>
+      </li>
+      <li>
+        <a href="" routerLink="/jobHistory"><span class="las la-clipboard-list"></span>
+          <span>Job History</span></a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="main-content">
+  <header>
+    <h2>
+      <label for="nav-toggle">
+        <span class="las la-bars"></span>
+      </label>
+
+      Welcome Admin!
+    </h2>
+
+    <div class="search-wrapper">
+      <button type="submit" (click)="submitGetLocationById()" style="background: none; border: none; text-align: center; justify-content: center;">
+        <span class="las la-search"></span>
+      </button>
+      <!-- <span class="las la-search"></span> -->
+      <input type="search" placeholder="Search Location by ID..." (change) = "getLocationByIdMethod($event)">
+    </div>
+
+    <div class="user-wrapper">
+      <img src="assets/user4.png" width="47px" height="47px" alt="user icon">
+      <div>
+        <h4>Yash Gautam</h4>
+        <small>Admin</small>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="getCountries">
+      <button type="button" class = "add" data-bs-toggle="modal" data-bs-target="#exampleModalToggle4"> Get Departments in Location <span class="las la-arrow-right"></span></button>
+   </div>
+
+   <div class="cards">
+     <div class="card-single" *ngFor="let item of departmentsInLocationData">
+       <div>
+          <h3>{{item.Department_Name}}</h3>
+         <!-- <span>{{item.Country_Name}}</span> -->
+       </div>
+       <div>
+         <span class="las la-users"></span>
+       </div>
+     </div>
+   </div>
+
+
+
+    <div class="recent-grid">
+      <div class="projects">
+        <div class="card1">
+          <div class="card-header1">
+            <h3>Locations</h3>
+
+            <button type="button" class = "add" data-bs-toggle="modal" data-bs-target="#exampleModalToggle"> Add Location <span class="las la-plus"></span></button>
+            <button type="button" class = "update" data-bs-toggle="modal" data-bs-target="#exampleModalToggle2"> Update Location  <span class="las la-upload"></span></button>
+            <button type="button" class = "delete" data-bs-toggle="modal" data-bs-target="#exampleModalToggle3">Delete Location  <span class="las la-minus"></span></button>
+          </div>
+
+          <div class="card-body1">
+            <div class="table-responsive">
+              <table width = "100%">
+                <thead>
+                  <tr>
+                    <td>City</td>
+                    <td>Location ID</td>
+                    <td>Postal Code</td>
+                    <td>Country ID</td>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  <tr *ngFor="let item of locationByIdData" class="getRegionByIdRow">
+                    <td>{{item.City}}</td>
+                    <td>
+                      <span class="status purple"></span>
+                      {{item.LocationId}}
+                    </td>
+                    <td>{{item.PostalCode}}</td>
+                    <td>{{item.CountryId}}</td>
+                  </tr>
+
+                  <tr *ngFor="let item of locationList">
+                    <td>{{item.City}}</td>
+                    <td>
+                      <span class="status purple"></span>
+                      {{item.LocationId}}
+                    </td>
+                    <td>{{item.PostalCode}}</td>
+                    <td>{{item.CountryId}}</td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="customers">
+        <div class="card1">
+          <div class="card-header1">
+            <h3>Our Employees</h3>
+
+            <button> Add Employee <span class="las la-plus"></span></button>
+          </div>
+
+          <div class="card-body1">
+
+            <div class="customer" *ngFor="let item of employeeList">
+              <div class="info">
+                <img src="assets/user3.gif" width="40px" height="40px" alt="profile icon">
+                <div>
+                  <h4>{{item.First_Name + " " + item.Last_Name}}</h4>
+                  <small>{{item.Job_id}}</small>
+                </div>
+              </div>
+              <div class="contact">
+                <span class="las la-user-circle"></span>
+                <span class="las la-comment"></span>
+                <span class="las la-phone"></span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+
+
+<!-- Modal code -->
+
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalToggleLabel"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form">
+          <h2>Add Location</h2>
+          <div class="form-element">
+            <label for="locationId">Location Id</label>
+            <input type="text" id="locationId" placeholder="Enter location Id" (change) = "getLocationId($event)">
+          </div>
+          <div class="form-element">
+            <label for="locationName">City</label>
+            <input type="text" id="locationName" placeholder="Enter Location Name" (change) = "getLocationCity($event)">
+          </div>
+          <div class="form-element">
+            <label for="locationPostalCode">Postal Code</label>
+            <input type="text" id="locationPostalCode" placeholder="Enter Postal Code" (change) = "getLocationPostalCode($event)" >
+          </div>
+          <div class="form-element">
+            <label for="locationCountryId">Country Id </label>
+            <input type="text" id="locationCountryId" placeholder="Enter Country Id" (change) = "getLocationCountryId($event)">
+          </div>
+
+          <div class="form-element mt-5">
+            <button type="submit" (click)="submitLocationData()">Add Location</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalToggleLabel2"></h5>
+
+      </div> -->
+      <div class="modal-body">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="float: right;"></button>
+        <div class="form">
+          <h2>Update Location</h2>
+          <div class="form-element">
+            <label for="existingCityName">Existing City Name</label>
+            <input type="text" id="existingCityName" placeholder="Enter Existing City Name" (change) = "getExistingCityName($event)">
+          </div>
+          <div class="form-element">
+            <label for="newCityName">New City Name</label>
+            <input type="text" id="newCityName" placeholder="Enter New City Name" (change) = "getNewCityName($event)">
+          </div>
+          <div class="form-element">
+            <label for="newCountryId">New Country Id</label>
+            <input type="text" id="newCountryId" placeholder="Enter New Country Id" (change) = "getNewCountryId($event)">
+          </div>
+          <div class="form-element">
+            <label for="newLocationId">New Location Id</label>
+            <input type="text" id="newLocationId" placeholder="Enter New Location Id" (change) = "getNewLocationId($event)">
+          </div>
+          <div class="form-element">
+            <label for="newPostalCode">New Postal Code</label>
+            <input type="text" id="newPostalCode" placeholder="Enter New Postal Code" (change) = "getNewPostalCode($event)">
+          </div>
+          <div class="form-element mt-5">
+            <button type="submit" (click)="submitUpdatedLocationData()">Update Location</button>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="modal fade" id="exampleModalToggle3" aria-hidden="true" aria-labelledby="exampleModalToggleLabel3" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalToggleLabel3"></h5>
+
+      </div> -->
+      <div class="modal-body">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="float: right;"></button>
+        <div class="form">
+          <h2>Delete Location</h2>
+          <div class="form-element">
+            <label for="locationName">Location Name</label>
+            <input type="text" id="locationName" placeholder="Enter Location Name" (change) = "getLocationCity($event)">
+          </div>
+          <div class="form-element mt-5">
+            <button type="submit" (click)="submitLocationDataToDelete()">Delete Location</button>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="modal fade" id="exampleModalToggle4" aria-hidden="true" aria-labelledby="exampleModalToggleLabel4" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalToggleLabel4"></h5>
+
+      </div> -->
+      <div class="modal-body">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="float: right;"></button>
+        <div class="form">
+          <h2>Get Departments in Location</h2>
+          <div class="form-element">
+            <label for="regionName">Location Name</label>
+            <input type="text" id="regionName" placeholder="Enter Location Name" (change) = "getLocationCity($event)">
+          </div>
+          <div class="form-element mt-5">
+            <button type="submit" (click)="submitLocationDataToDisplayDepartments()">Display Departments</button>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+</div>

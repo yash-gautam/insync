@@ -1,0 +1,363 @@
+<input type="checkbox" id="nav-toggle">
+
+<div class="sidebar">
+  <div class="sidebar-brand">
+    <h2>
+      <span class="las la-link"></span>
+      <!-- <span><img src="https://img.icons8.com/ios-filled/35/000000/cloud-sync--v1.png"/></span> -->
+      <span>Insync</span></h2>
+  </div>
+
+  <div class="sidebar-menu">
+    <ul>
+      <li>
+        <a href="" routerLink="/regions"><span class="las la-igloo"></span>
+          <span>Regions</span></a>
+      </li>
+      <li>
+        <a href="" routerLink="/" class="active"><span class="las la-users"></span>
+          <span>Countries</span></a>
+      </li>
+      <li>
+        <a href="" routerLink="/locations"><span class="las la-clipboard-list"></span>
+          <span>Locations</span></a>
+      </li>
+      <li>
+        <a href="" routerLink="/departments"><span class="las la-shopping-bag"></span>
+          <span>Departments</span></a>
+      </li>
+      <li>
+        <a href="" routerLink="/employees"><span class="las la-receipt"></span>
+          <span>Jobs</span></a>
+      </li>
+      <li>
+        <a href="" routerLink="/employees"><span class="las la-user-circle"></span>
+          <span>Employees</span></a>
+      </li>
+      <li>
+        <a href="" routerLink="/jobHistory"><span class="las la-clipboard-list"></span>
+          <span>Job History</span></a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="main-content">
+  <header>
+    <h2>
+      <label for="nav-toggle">
+        <span class="las la-bars"></span>
+      </label>
+
+      Welcome Admin!
+    </h2>
+
+    <div class="search-wrapper">
+      <button type="submit" (click)="submitGetCountryById()" style="background: none; border: none; text-align: center; justify-content: center;">
+        <span class="las la-search"></span>
+      </button>
+      <!-- <span class="las la-search"></span> -->
+      <input type="search" placeholder="Search Country by ID..." (change) = "getCountryByIdMethod($event)">
+    </div>
+
+    <div class="user-wrapper">
+      <img src="assets/user4.png" width="47px" height="47px" alt="user icon">
+      <div>
+        <h4>Yash Gautam</h4>
+        <small>Admin</small>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="getCountries">
+      <button type="button" class = "add" data-bs-toggle="modal" data-bs-target="#exampleModalToggle4"> Get Locations in Country <span class="las la-arrow-right"></span></button>
+   </div>
+   <div class="cards">
+    <div class="card-single" *ngFor="let item of locationsInCountryData">
+      <div>
+         <h3>{{item.CountryId}}</h3>
+        <span>{{item.City}}</span>
+      </div>
+      <div>
+        <span class="las la-users"></span>
+      </div>
+    </div>
+  </div>
+    <!-- <div class="cards">
+      <div class="card-single">
+        <div>
+          <h1>54</h1>
+          <span>Customers</span>
+        </div>
+        <div>
+          <span class="las la-users"></span>
+        </div>
+      </div>
+
+      <div class="card-single">
+        <div>
+          <h1>79</h1>
+          <span>Projects</span>
+        </div>
+        <div>
+          <span class="las la-clipboard-list"></span>
+        </div>
+      </div>
+
+      <div class="card-single">
+        <div>
+          <h1>124</h1>
+          <span>Orders</span>
+        </div>
+        <div>
+          <span class="las la-shopping-bag"></span>
+        </div>
+      </div>
+
+      <div class="card-single">
+        <div>
+          <h1>$6k</h1>
+          <span>Income</span>
+        </div>
+        <div>
+          <span class="lab la-google-wallet"></span>
+        </div>
+      </div>
+    </div> -->
+
+
+
+    <div class="recent-grid">
+      <div class="projects">
+        <div class="card1">
+          <div class="card-header1">
+            <h3>Countries</h3>
+
+            <button type="button" class="add" data-bs-toggle="modal" data-bs-target="#exampleModalToggle"> Add Country <span class="las la-plus"></span></button>
+            <button type="button" class = "update" data-bs-toggle="modal" data-bs-target="#exampleModalToggle2">Update Country <span class="las la-upload"></span></button>
+            <button type="button" class = "delete" data-bs-toggle="modal" data-bs-target="#exampleModalToggle3">Delete Country <span class="las la-minus"></span></button>
+          </div>
+
+          <div class="card-body1">
+            <div class="table-responsive">
+              <table width = "100%">
+                <thead>
+                  <tr>
+                    <td>Country Name</td>
+                    <td>Country Id</td>
+                    <td>Region Id</td>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  <tr *ngFor="let item of countryByIdData" class="getRegionByIdRow">
+                    <td>{{item.Country_Name}}</td>
+                    <td>{{item.Country_Id}}</td>
+                    <td>{{item.Region_Id}}</td>
+                  </tr>
+
+                  <tr *ngFor="let item of countryNameList">
+                    <td>{{item.Country_Name}}</td>
+                    <td>{{item.Country_Id}}</td>
+                    <td>{{item.Region_Id}}</td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <div class="customers">
+        <div class="card1">
+          <div class="card-header1">
+            <h3>Our Employees</h3>
+
+            <button> Add Employee <span class="las la-plus"></span></button>
+          </div>
+
+          <div class="card-body1">
+            <div class="customer" *ngFor="let item of employeeList">
+              <div class="info">
+                <img src="assets/user3.gif" width="40px" height="40px" alt="profile icon">
+                <div>
+                  <h4>{{item.First_Name + " " + item.Last_Name}}</h4>
+                  <small>{{item.Job_id}}</small>
+                </div>
+              </div>
+              <div class="contact">
+                <span class="las la-user-circle"></span>
+                <span class="las la-comment"></span>
+                <span class="las la-phone"></span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+  </main>
+</div>
+
+
+
+<!-- Modal code -->
+
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalToggleLabel"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form">
+          <h2>Add Country</h2>
+          <div class="form-element">
+            <label for="regionId">Region Id</label>
+            <input type="text" id="regionId" placeholder="Enter Region Id" (change) = "getRegionId($event)">
+          </div>
+          <div class="form-element">
+            <label for="countryName">Country Name</label>
+            <input type="text" id="countryName" placeholder="Enter Country Name" (change) = "getCountryName($event)">
+          </div>
+          <div class="form-element">
+            <label for="countryId">Country Id</label>
+            <input type="text" id="countryId" placeholder="Enter Country Id" (change) =
+            "getCountryId($event)">
+          </div>
+          <!-- <div class="form-element">
+            <input type="checkbox" id="remember-me">
+            <label for="remember-me">Remember Me</label>
+          </div> -->
+          <div class="form-element mt-5">
+            <button type="submit" (click)="submitCountryData()">Add Country</button>
+          </div>
+          <!-- <div class="form-element">
+            <a href="#">Forgot Password</a>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalToggleLabel2"></h5>
+
+      </div> -->
+      <div class="modal-body">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="float: right;"></button>
+        <div class="form">
+          <h2>Update Country</h2>
+          <div class="form-element">
+            <label for="existingCountryName">Existing Country Name</label>
+            <input type="text" id="existingCountryName" placeholder="Enter Existing Country Name" (change) = "getExistingCountryName($event)">
+          </div>
+          <div class="form-element">
+            <label for="newRegionId">New Region Id</label>
+            <input type="text" id="newRegionId" placeholder="Enter New Region Id" (change) = "getNewRegionId($event)">
+          </div>
+          <div class="form-element">
+            <label for="newCountryId">New Country Id</label>
+            <input type="text" id="newCountryId" placeholder="Enter New Country Id" (change) = "getNewCountryId($event)">
+          </div>
+          <div class="form-element">
+            <label for="newCountryName">New Country Name</label>
+            <input type="text" id="newCountryName" placeholder="Enter New Country Name" (change) = "getNewCountryName($event)">
+          </div>
+          <div class="form-element mt-5">
+            <button type="submit" (click)="submitUpdatedCountryData()">Update Country</button>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="modal fade" id="exampleModalToggle3" aria-hidden="true" aria-labelledby="exampleModalToggleLabel3" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalToggleLabel3"></h5>
+
+      </div> -->
+      <div class="modal-body">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="float: right;"></button>
+        <div class="form">
+          <h2>Delete Country</h2>
+          <div class="form-element">
+            <label for="countryName">Country Name</label>
+            <input type="text" id="countryName" placeholder="Enter Country Name" (change) = "getCountryName($event)">
+          </div>
+          <div class="form-element mt-5">
+            <button type="submit" (click)="submitCountryDataToDelete()">Delete Country</button>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="modal fade" id="exampleModalToggle4" aria-hidden="true" aria-labelledby="exampleModalToggleLabel4" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalToggleLabel4"></h5>
+
+      </div> -->
+      <div class="modal-body">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="float: right;"></button>
+        <div class="form">
+          <h2>Get Locations in Country</h2>
+          <div class="form-element">
+            <label for="regionName">Country Name</label>
+            <input type="text" id="regionName" placeholder="Enter Country Name" (change) = "getCountryName($event)">
+          </div>
+          <div class="form-element mt-5">
+            <button type="submit" (click)="submitRegionDataToDisplayCountries()">Display Countries</button>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
